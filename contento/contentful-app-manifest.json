@@ -1,0 +1,20 @@
+{
+  "name": "Contento",
+  "description": "Plain-language execution in Contentful: run tasks via the text box or use shortcut buttons for Translate content, SEO optimize blog posts, and Generate alt text.",
+  "locations": [
+    {
+      "id": "sidebar",
+      "name": "Sidebar",
+      "description": "Contento sidebar",
+      "path": "index.html",
+      "target": "sidebar"
+    },
+    {
+      "id": "page",
+      "name": "Page",
+      "description": "Contento full page",
+      "path": "index.html",
+      "target": "page"
+    }
+  ]
+}

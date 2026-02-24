@@ -4,7 +4,9 @@ import type { NextRequest } from 'next/server';
 // Allow Contentful app origins (app runs in iframe from Contentful)
 const ALLOWED_ORIGINS = [
   'https://app.contentful.com',
+  'https://be.contentful.com',
   /^https:\/\/[a-z0-9-]+\.contentful\.com$/,
+  /^https:\/\/[a-z0-9-]+\.ctfassets\.net$/,
   'http://localhost:3000',
   'http://localhost:5173',
   'http://127.0.0.1:3000',
@@ -12,7 +14,7 @@ const ALLOWED_ORIGINS = [
 ];
 
 function isAllowedOrigin(origin: string | null): boolean {
-  if (!origin) return false;
+  if (!origin) return true;  // Allow null origin (sandboxed iframes)
   return ALLOWED_ORIGINS.some((allowed) => {
     if (typeof allowed === 'string') return origin === allowed;
     return (allowed as RegExp).test(origin);
@@ -21,7 +23,7 @@ function isAllowedOrigin(origin: string | null): boolean {
 
 export function middleware(request: NextRequest) {
   const origin = request.headers.get('origin');
-  const allowed = isAllowedOrigin(origin) || !origin;
+  const allowed = isAllowedOrigin(origin);
 
   const corsHeaders: Record<string, string> = {
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
@@ -30,7 +32,7 @@ export function middleware(request: NextRequest) {
   };
   if (allowed && origin) {
     corsHeaders['Access-Control-Allow-Origin'] = origin;
-  } else if (allowed) {
+  } else {
     corsHeaders['Access-Control-Allow-Origin'] = '*';
   }
 

@@ -10,3 +10,4 @@ Contento is a chat interface inside Contentful that uses AI actions for bulk tas
 ## Setup
 
 See `CONTENTO-SETUP.md` in the project root (or `alt-text-agent/README-CONTENTO.md`) for deployment instructions.
+

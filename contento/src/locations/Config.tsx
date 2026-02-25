@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { useSDK } from '@contentful/react-apps-toolkit';
-import { Box, TextInput, Paragraph, Form, Button } from '@contentful/f36-components';
+import { Box, TextInput, Paragraph, Form, FormControl } from '@contentful/f36-components';
 
 export function Config() {
   const sdk = useSDK<{ app: { onConfigure: (cb: () => object) => void } }>();
@@ -28,16 +28,18 @@ export function Config() {
         Contento configuration
       </Paragraph>
       <Form>
-        <Form.Control>
-          <Form.Label htmlFor="backendUrl">Backend API URL</Form.Label>
+        <FormControl>
+          <FormControl.Label htmlFor="backendUrl">Backend API URL</FormControl.Label>
           <TextInput
             id="backendUrl"
             value={backendUrl}
             onChange={(e) => setBackendUrl(e.target.value)}
             placeholder="https://your-alt-text-agent.vercel.app"
-            helpText="The URL of your deployed alt-text-agent backend (e.g. on Vercel). Must include https://"
           />
-        </Form.Control>
+          <FormControl.HelpText>
+            The URL of your deployed alt-text-agent backend (e.g. on Vercel). Must include https://
+          </FormControl.HelpText>
+        </FormControl>
       </Form>
     </Box>
   );

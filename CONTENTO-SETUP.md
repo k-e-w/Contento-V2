@@ -86,16 +86,31 @@ Two options:
 
 ---
 
-## 6. Rebuild and Redeploy Contento
+## 6. Host Contento (External source – recommended)
 
-After adding the Config screen:
+Contento is built and served from the backend so you don’t need to upload `dist` to Contentful.
 
-```bash
-cd contento
-npm run build
-```
+1. Build Contento with your backend URL:
+   ```bash
+   cd contento
+   VITE_CONTENTO_BACKEND_URL=https://your-backend.vercel.app npm run build
+   ```
 
-Upload the updated `dist` contents to Contentful.
+2. Copy the build into the backend:
+   ```bash
+   cp -r dist/* ../alt-text-agent/public/contento/
+   ```
+
+3. Commit and push so Vercel redeploys with the new frontend.
+
+4. In Contentful: **App details → Frontend**:
+   - Turn off **Hosted by Contentful**
+   - Choose **External source**
+   - Set the app URL to: `https://your-backend.vercel.app/contento/` (must end with `/`)
+
+### Alternative: Contentful hosting (drag-and-drop)
+
+If you prefer Contentful hosting, build with the backend URL and upload the `dist` contents to Contentful. This can cause “App failed to load” in some setups; external hosting is more reliable.
 
 ---
 
@@ -114,8 +129,8 @@ The Contentful MCP server is a separate tool for AI-assisted development. It is 
 - [ ] Backend deployed (e.g. `https://your-backend.vercel.app`)
 - [ ] Backend env vars set (CMA token, AI action IDs)
 - [ ] CORS enabled (middleware in place)
-- [ ] Contento app configured with backend URL (via app config or build)
-- [ ] Contento rebuilt and uploaded to Contentful
+- [ ] Contento built with backend URL and copied to `alt-text-agent/public/contento/`
+- [ ] Contentful app set to **External source** with URL `https://your-backend.vercel.app/contento/`
 - [ ] App installed in your space with backend URL configured
 
 ---

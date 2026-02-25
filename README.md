@@ -5,7 +5,7 @@ Contento is a chat interface inside Contentful that uses AI actions for bulk tas
 ## Structure
 
 - **alt-text-agent/** – Backend (Next.js). Deploy to Vercel. Serves `/api/execute`.
-- **contento/** – Frontend (React/Vite). Build locally and upload `dist/` to Contentful.
+- **contento/** – Frontend (React/Vite). Build and serve from backend at `/contento/` (external source).
 
 ## Setup
 
